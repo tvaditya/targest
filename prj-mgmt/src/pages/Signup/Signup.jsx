@@ -40,11 +40,9 @@ export default function Signup() {
                         <p className={"text-muted-foregorund mb-2.5"}>Nome Completo</p>
                         <Input/>
                         <p className={"mt-5 text-muted-foregorund mb-2.5"}>Email</p>
-                        <Input/>
+                        <Input type={"email"}/>
                         <p className={"mt-5 text-muted-foregorund mb-2.5"}>Senha</p>
-                        <Input/>
-                        {/*<p className={"mt-5 text-muted-foregorund mb-2.5"}>Confirme sua senha</p>*/}
-                        {/*<Input/>*/}
+                        <Input type={"password"}/>
                         <Button size={"xl"} className={"mt-10 text-lg w-full"}>Entrar na conta</Button>
                     </form>
                     <div className={"mt-12 flex justify-center gap-2 text-lg"}>
