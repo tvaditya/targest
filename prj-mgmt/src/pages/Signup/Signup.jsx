@@ -1,9 +1,21 @@
-import React from "react";
+import React, {useState} from "react";
 import  { Button } from "@/shadcn/components/ui/button";
 import { Input } from "@/shadcn/components/ui/input";
 import Logo from "../../assets/logo.svg";
 import { Link } from "react-router-dom";
+import {useSignup} from "@/hooks/useSignup";
+import {ReloadIcon} from "@radix-ui/react-icons";
 export default function Signup() {
+const [fullName, setFullName] = useState("");
+const [email, setEmail] = useState("");
+const [password, setPassword] = useState("");
+const { error, isPending, signup } = useSignup();
+
+const handleSubmit = (e) => {
+    e.preventDefault();
+    signup(email, password, fullName);
+}
+
     return (
         <div className={"flex gap-20 h-screen w-full  px-40 py-20"}>
             <div className={"w-1/2 bg-muted rounded-xl p-12"}>
@@ -36,14 +48,36 @@ export default function Signup() {
                     <p className={"mt-4 text-muted-foreground font-normal text-lg"}>
                         Crie sua conta agora mesmo
                     </p>
-                    <form className={"mt-10"}>
+                    <form className={"mt-10"} onSubmit={handleSubmit}>
                         <p className={"text-muted-foregorund mb-2.5"}>Nome Completo</p>
-                        <Input/>
+                        <Input
+                            type={"text"}
+                            autoComplete={"name"}
+                            value={fullName}
+                            onChange={(e) => setFullName(e.target.value)}
+                            />
                         <p className={"mt-5 text-muted-foregorund mb-2.5"}>Email</p>
-                        <Input type={"email"}/>
+                        <Input
+                            type={"email"}
+                            autoComplete={"email"}
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            />
                         <p className={"mt-5 text-muted-foregorund mb-2.5"}>Senha</p>
-                        <Input type={"password"}/>
-                        <Button size={"xl"} className={"mt-10 text-lg w-full"}>Entrar na conta</Button>
+                        <Input
+                            type={"password"}
+                            autoComplete={"new-password"}
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                               />
+                        <Button
+                            disabled={isPending}
+                            size={"xl"} className={"mt-10 text-lg w-full"}>
+                            {isPending &&
+                                (<ReloadIcon className={"w-5 h-5 mr-2 animate-spin"}/>
+                                )}
+                            {isPending ? "Criando a conta..." : "Criar minha conta"}
+                        </Button>
                     </form>
                     <div className={"mt-12 flex justify-center gap-2 text-lg"}>
                         <p>Já tem um conta?</p>

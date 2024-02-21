@@ -12,6 +12,7 @@ export const useSignup = () => {
   const { dispatch } = useAuthContext();
   const { updateDocument } = useFirestore("users");
 
+
   const signup = async (email, password, name) => {
     setError(null);
     setIsPending(true);

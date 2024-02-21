@@ -6,8 +6,17 @@ import Projects from "./pages/Projects/Projects";
 import Login from "./pages/Login/Login";
 import Signup from "./pages/Signup/Signup";
 import {ThemeProvider} from "@/providers/ThemeProvider.jsx";
+import { useAuthContext} from "@/hooks/useAuthContext.js";
+import Loading from "@/components/Loading.jsx";
+
 function App() {
-    const user = undefined;
+    // const user = undefined;
+    const { user, authIsReady } = useAuthContext();
+
+    if (!authIsReady) {
+        return <Loading/>;
+    }
+
     return (
         <ThemeProvider defaultTheme={"light"} storageKey={"vite-ui-theme"}>
             <div className={"App flex"}>
@@ -27,6 +36,7 @@ function App() {
                             <Routes>
                                 <Route path={"/login"} element={<Login/>}/>
                                 <Route path={"/signup"} element={<Signup/>}/>
+                                <Route path={"*"} element={<Signup/>}/>
                             </Routes>
     )
                     }

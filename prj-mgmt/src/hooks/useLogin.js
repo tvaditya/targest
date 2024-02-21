@@ -17,9 +17,8 @@ export const useLogin = () => {
     try {
       const res = await signInWithEmailAndPassword(auth, email, password);
 
-      // const userRef = doc(db, "users", res.user.uid);
-
-      // await updateDoc(userRef, { online: true });
+      const userRef = doc(db, "users", res.user.uid);
+      await updateDoc(userRef, { online: true });
 
       dispatch({ type: "LOGIN", payload: res.user });
 
