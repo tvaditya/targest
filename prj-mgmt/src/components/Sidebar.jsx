@@ -58,22 +58,22 @@ const projectOptions = [
 
 const labelOptions = [
     {
-        route: "/",
+        route: "/a",
         name: "Alta Prioridade",
         icon: <LabelSvg color={"#FF0000"}/>
     },
     {
-        route: "/",
+        route: "/b",
         name: "Media Prioridade",
         icon: <LabelSvg color={"#FFA500"}/>
     },
     {
-        route: "/",
+        route: "/c",
         name: "Baixa Prioridade",
         icon: <LabelSvg color={"#FFFF00"}/>
     },
     {
-        route: "/",
+        route: "/d",
         name: "Em stand by",
         icon: <LabelSvg color={"#008000"}/>
     },
@@ -88,7 +88,7 @@ export default function Sidebar() {
     };
 
     return (
-        <div className={"h-screen w-[250px] bg-accent"}>
+        <nav className={"h-screen w-[250px] bg-accent border border-border"}>
             <div className={"p-6"}>
                 <LogoMain size={"small"}/>
             </div>
@@ -145,12 +145,12 @@ export default function Sidebar() {
 
             <Button className={"px-5 opacity-50"} variant={"ghost"} onClick={handleLogout}>
                 <InfoCircledIcon className={"w-4 h-4 mr-2"}/>
-                Informações da conta
+                Central de Ajuda
             </Button>
             <Button className={"px-5 opacity-50"} variant={"ghost"} onClick={handleLogout}>
                 <ExitIcon className={"w-4 h-4 mr-2"}/>
                 Sair da conta
             </Button>
-        </div>
+        </nav>
     )
 }

@@ -8,11 +8,15 @@ import Signup from "./pages/Signup/Signup";
 import {ThemeProvider} from "@/providers/ThemeProvider.jsx";
 import { useAuthContext} from "@/hooks/useAuthContext.js";
 import Loading from "@/components/Loading.jsx";
+import Chat from "@/components/Chat.jsx";
 import Profile from "./pages/Profile/Profile";
+import {useState} from "react";
+import ChatButton from "@/components/ChatButton.jsx";
 
 function App() {
     // const user = undefined;
     const { user, authIsReady } = useAuthContext();
+    const [chatIsOpen, setChatIsOpen] = useState(false);
 
     if (!authIsReady) {
         return <Loading/>;
@@ -27,13 +31,15 @@ function App() {
                             <Sidebar/>
                             <div className={"flex-grow"}>
                                 <Routes>
-                                    <Route exaact path={"/"} element={<Home/>}/>
+                                    <Route exact path={"/"} element={<Home/>}/>
                                     <Route path={"/profile"} element={<Profile/>}/>
                                     <Route path={"/projects"} element={<Projects/>}/>
                                     <Route path={"*"} element={<Home/>}/>
                                 </Routes>
                             </div>
                             <MembersBar/>
+                            {chatIsOpen && <Chat />}
+                            <ChatButton setChatIsOpen={setChatIsOpen}/>
                         </> ) : (
                             <Routes>
                                 <Route path={"/login"} element={<Login/>}/>
