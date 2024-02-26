@@ -3,12 +3,18 @@ import { useCollection} from "@/hooks/useCollection.js";
 // import Loading from "@/components/Loading.jsx";
 import MembersSkeleton from "@/components/MembersSkeleton..jsx";
 
-export default function MembersBar() {
+export default function MembersBar({setSelectedChat, setChatIsOpen}) {
     const { documents: users } = useCollection("users");
     const [usersLength, setUsersLength] = useState(0);
 
-    const openChat = (userId) => {
-
+    const openChat = (userId, userName) => {
+        setChatIsOpen(true);
+        setSelectedChat(
+            {
+                id: userId,
+                recipient: userName
+            }
+        );
     }
 
     useEffect(() => {
@@ -34,7 +40,7 @@ export default function MembersBar() {
                 <div key={user.id}
                      className={"flex gap-2 items-center text-sm py-2.5"}
                      role={"button"}
-                     onClick={() => openChat(user.id)}
+                     onClick={() => openChat(user.id, user.name)}
                 >
                     <div className={`${user.online ? "bg-green-500": "bg-red-500"} h-3 w-3 rounded-full`} />
                     <p className={"font-medium"}>

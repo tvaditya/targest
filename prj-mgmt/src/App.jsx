@@ -17,6 +17,7 @@ function App() {
     // const user = undefined;
     const { user, authIsReady } = useAuthContext();
     const [chatIsOpen, setChatIsOpen] = useState(false);
+    const [selectedChat, setSelectedChat] = useState(null);
 
     if (!authIsReady) {
         return <Loading/>;
@@ -37,9 +38,15 @@ function App() {
                                     <Route path={"*"} element={<Home/>}/>
                                 </Routes>
                             </div>
-                            <MembersBar/>
-                            {chatIsOpen && <Chat />}
-                            <ChatButton setChatIsOpen={setChatIsOpen}/>
+                            <MembersBar
+                                setSelectedChat={setSelectedChat}
+                                setChatIsOpen={setChatIsOpen}
+                            />
+                            {chatIsOpen && <Chat selectedChat={selectedChat} />}
+                            <ChatButton
+                                setChatIsOpen={setChatIsOpen}
+                                setSelectedChat={setSelectedChat}
+                            />
                         </> ) : (
                             <Routes>
                                 <Route path={"/login"} element={<Login/>}/>
